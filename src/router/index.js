@@ -1,11 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-// Import dynamique des composants
 const HomeView = () => import('../views/HomeView.vue')
 const LanguagesView = () => import('../views/LanguagesView.vue')
 const WebView = () => import('../views/WebView.vue')
 const CybersecurityView = () => import('../views/CybersecurityView.vue')
 const ContactView = () => import('../views/ContactView.vue')
+// Ajoutez ces imports pour les pages détaillées
+const TechnologyView = () => import('../views/TechnologyView.vue')
 
 const routes = [
   {
@@ -17,6 +18,13 @@ const routes = [
     path: '/langages',
     name: 'langages',
     component: LanguagesView
+  },
+  {
+    // Page détaillée pour chaque langage
+    path: '/langages/:tech',
+    name: 'technology',
+    component: TechnologyView,
+    props: true
   },
   {
     path: '/web',

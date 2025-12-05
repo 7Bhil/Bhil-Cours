@@ -7,11 +7,11 @@
           <!-- Logo amélioré -->
           <router-link to="/" class="flex items-center space-x-3 group">
             <div class="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300">
-              <span class="text-white text-xl font-bold">ED</span>
+              <span class="text-white text-xl font-bold">B$</span>
             </div>
             <div>
               <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                EduCode
+                Bhil$
               </h1>
               <p class="text-xs text-gray-500">Learn • Code • Grow</p>
             </div>
