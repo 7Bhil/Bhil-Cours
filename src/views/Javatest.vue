@@ -50,23 +50,110 @@
           </div>
         </div>
 
-        <div class="flex gap-4">
+        <!-- Notification d'envoi automatique -->
+        <div v-if="emailSent" class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+          <div class="flex items-center">
+            <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <p class="text-green-800 font-medium">Résultat envoyé par email automatiquement !</p>
+          </div>
+        </div>
+
+        <!-- Section de partage -->
+        <div class="mb-8">
+          <h4 class="text-lg font-semibold text-gray-900 mb-4">Partager mon résultat</h4>
+          
+          <!-- Bouton de partage principal -->
           <button
-            @click="resetTest"
-            class="flex-1 bg-gradient-to-r from-red-600 to-orange-600 text-white py-4 rounded-lg font-semibold hover:from-red-700 hover:to-orange-700 transition-all flex items-center justify-center gap-2"
+            @click="toggleShareOptions"
+            class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all mb-4 flex items-center justify-center gap-2"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
             </svg>
-            Recommencer le test
+            {{ showShareOptions ? 'Masquer les options' : 'Partager mon résultat' }}
           </button>
-          <a
-            :href="shareEmailUrl"
-            class="flex-1 bg-gray-100 text-gray-700 py-4 rounded-lg font-semibold hover:bg-gray-200 transition-all text-center flex items-center justify-center"
-          >
-            Partager mon résultat
-          </a>
+
+          <!-- Options de partage -->
+          <div v-if="showShareOptions" class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+            <button
+              @click="shareViaEmail"
+              class="bg-gray-100 hover:bg-gray-200 text-gray-800 p-4 rounded-lg flex flex-col items-center justify-center transition-all duration-200"
+            >
+              <svg class="w-6 h-6 mb-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+              <span class="text-sm font-medium">Email</span>
+            </button>
+
+            <button
+              @click="shareViaWhatsApp"
+              class="bg-green-100 hover:bg-green-200 text-green-800 p-4 rounded-lg flex flex-col items-center justify-center transition-all duration-200"
+            >
+              <svg class="w-6 h-6 mb-2 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.76.982.998-3.675-.236-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.897 6.994c-.004 5.45-4.438 9.88-9.888 9.88m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.333.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.333 11.893-11.893 0-3.18-1.24-6.162-3.491-8.411"></path>
+              </svg>
+              <span class="text-sm font-medium">WhatsApp</span>
+            </button>
+
+            <button
+              @click="shareViaFacebook"
+              class="bg-blue-100 hover:bg-blue-200 text-blue-800 p-4 rounded-lg flex flex-col items-center justify-center transition-all duration-200"
+            >
+              <svg class="w-6 h-6 mb-2 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+              </svg>
+              <span class="text-sm font-medium">Facebook</span>
+            </button>
+
+            <button
+              @click="shareViaTwitter"
+              class="bg-black hover:bg-gray-800 text-white p-4 rounded-lg flex flex-col items-center justify-center transition-all duration-200"
+            >
+              <svg class="w-6 h-6 mb-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.213c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+              </svg>
+              <span class="text-sm font-medium">Twitter/X</span>
+            </button>
+          </div>
+
+          <!-- Lien à copier -->
+          <div v-if="showShareOptions" class="mt-4">
+            <p class="text-sm text-gray-600 mb-2">Partagez ce lien :</p>
+            <div class="flex gap-2">
+              <input
+                type="text"
+                :value="shareableLink"
+                readonly
+                class="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg bg-gray-50 text-gray-700 text-sm"
+              />
+              <button
+                @click="copyToClipboard"
+                class="bg-gray-800 text-white px-4 py-3 rounded-lg font-semibold hover:bg-gray-900 transition-all flex items-center gap-2"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copier
+              </button>
+            </div>
+            <p v-if="copiedToClipboard" class="text-green-600 text-sm mt-2 text-center">
+              ✓ Lien copié dans le presse-papier !
+            </p>
+          </div>
         </div>
+
+        <!-- Bouton recommencer -->
+        <button
+          @click="resetTest"
+          class="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-4 rounded-lg font-semibold hover:from-red-700 hover:to-orange-700 transition-all flex items-center justify-center gap-2"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          Recommencer le test
+        </button>
       </div>
 
       <!-- Écran du test -->
@@ -124,7 +211,7 @@
               @click="handleAnswer(index)"
               :disabled="showResult"
               :class="getOptionClass(index)"
-              class="w-full text-left p-4 rounded-lg border-2 transition-all"
+              class="w-full text-left p-4 rounded-lg border-2 transition-all duration-200"
             >
               <div class="flex items-center justify-between">
                 <span class="font-medium">{{ option }}</span>
@@ -148,7 +235,8 @@
               v-model="userInput"
               :disabled="showResult"
               placeholder="Tapez votre réponse ici..."
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none disabled:bg-gray-100"
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-2 focus:ring-red-200 focus:outline-none disabled:bg-gray-100 transition-all"
+              @keyup.enter="checkAnswer"
             />
           </div>
 
@@ -163,7 +251,8 @@
               :disabled="showResult"
               placeholder="Ex: 5"
               min="1"
-              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none disabled:bg-gray-100"
+              class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:ring-2 focus:ring-red-200 focus:outline-none disabled:bg-gray-100 transition-all"
+              @keyup.enter="checkAnswer"
             />
           </div>
 
@@ -178,7 +267,7 @@
               </svg>
               <div>
                 <p :class="getResultTextClass()" class="font-semibold mb-1">
-                  {{ lastAnswerCorrect ? 'Bonne réponse !' : 'Réponse incorrecte' }}
+                  {{ lastAnswerCorrect ? 'Bonne réponse ! 🎉' : 'Réponse incorrecte 💡' }}
                 </p>
                 <p class="text-sm text-gray-700">{{ question.explanation }}</p>
               </div>
@@ -241,9 +330,14 @@ export default {
       answers: [],
       testCompleted: false,
       userInput: '',
-      selectedQuestions: {}, // Stocke les questions sélectionnées pour chaque niveau
+      selectedQuestions: {},
       
-      // Pool de questions beaucoup plus grand
+      // Partage
+      emailSent: false,
+      showShareOptions: false,
+      copiedToClipboard: false,
+      
+      // Pool de questions
       questionPool: {
         level1: {
           title: "Niveau 1 - Fondamentaux Java",
@@ -261,7 +355,7 @@ export default {
                 "static void main(String args)"
               ],
               correct: 1,
-              explanation: "La méthode main() doit être public, static, void et accepter String[] args"
+              explanation: "La méthode main() doit être public, static, void et accepter String[] args comme paramètre"
             },
             {
               id: 2,
@@ -270,7 +364,7 @@ export default {
               code: null,
               options: ["implements", "extends", "inherits", "derives"],
               correct: 1,
-              explanation: "Le mot-clé 'extends' est utilisé pour l'héritage de classe"
+              explanation: "Le mot-clé 'extends' est utilisé pour l'héritage de classe. 'implements' est utilisé pour les interfaces."
             },
             {
               id: 3,
@@ -279,7 +373,7 @@ export default {
               code: null,
               options: ["16 bits", "32 bits", "64 bits", "8 bits"],
               correct: 1,
-              explanation: "En Java, le type int occupe 32 bits (4 octets)"
+              explanation: "En Java, le type int occupe 32 bits (4 octets). 'long' occupe 64 bits."
             },
             {
               id: 4,
@@ -293,7 +387,7 @@ export default {
                 "Java Version Manager"
               ],
               correct: 1,
-              explanation: "JVM = Java Virtual Machine, elle exécute le bytecode Java"
+              explanation: "JVM = Java Virtual Machine, elle exécute le bytecode Java indépendamment de la plateforme"
             },
             {
               id: 5,
@@ -302,7 +396,7 @@ export default {
               code: null,
               options: ["ArrayList", "LinkedList", "HashSet", "HashMap"],
               correct: 2,
-              explanation: "HashSet implémente l'interface Set qui n'autorise pas les doublons"
+              explanation: "HashSet implémente l'interface Set qui n'autorise pas les doublons. Les List autorisent les doublons."
             },
             {
               id: 6,
@@ -316,7 +410,7 @@ export default {
                 "Ils ne sont pas comparables"
               ],
               correct: 1,
-              explanation: "'==' compare les adresses mémoire, '.equals()' compare les valeurs (pour les objets)"
+              explanation: "'==' compare les références (adresses mémoire) pour les objets, '.equals()' compare les valeurs."
             },
             {
               id: 7,
@@ -325,7 +419,7 @@ export default {
               code: null,
               options: ["void", "La classe elle-même", "int", "Les constructeurs n'ont pas de type de retour"],
               correct: 3,
-              explanation: "Les constructeurs n'ont pas de type de retour, pas même void"
+              explanation: "Les constructeurs n'ont pas de type de retour, pas même void. Ils retournent implicitement une instance de la classe."
             },
             {
               id: 8,
@@ -333,13 +427,13 @@ export default {
               question: "Que signifie 'final' lorsqu'il est appliqué à une variable ?",
               code: null,
               options: [
-                "La variable ne peut pas être modifiée",
+                "La variable ne peut pas être modifiée après son initialisation",
                 "La variable est statique",
                 "La variable est publique",
                 "La variable est optionnelle"
               ],
               correct: 0,
-              explanation: "Une variable 'final' ne peut être assignée qu'une seule fois"
+              explanation: "Une variable 'final' ne peut être assignée qu'une seule fois. Pour les objets, la référence ne peut changer."
             },
             {
               id: 9,
@@ -348,7 +442,7 @@ export default {
               code: null,
               options: ["Object", "Class", "Main", "Super"],
               correct: 0,
-              explanation: "La classe Object est la racine de la hiérarchie des classes"
+              explanation: "La classe Object est la racine de la hiérarchie des classes. Toutes les classes héritent directement ou indirectement d'Object."
             },
             {
               id: 10,
@@ -357,62 +451,7 @@ export default {
               code: null,
               options: ["exception", "error", "try-catch", "check"],
               correct: 2,
-              explanation: "try-catch-finally est le mécanisme de gestion des exceptions"
-            },
-            {
-              id: 11,
-              type: "mcq",
-              question: "Quelle est la portée par défaut d'une variable de classe ?",
-              code: null,
-              options: ["public", "private", "protected", "package-private"],
-              correct: 3,
-              explanation: "Par défaut, les variables ont une portée package (visible dans le même package)"
-            },
-            {
-              id: 12,
-              type: "mcq",
-              question: "Quelle interface doit implémenter une classe pour être triée avec Collections.sort() ?",
-              code: null,
-              options: ["Sortable", "Comparable", "Comparator", "Ordered"],
-              correct: 1,
-              explanation: "L'interface Comparable permet de définir un ordre naturel"
-            },
-            {
-              id: 13,
-              type: "mcq",
-              question: "Quel est l'opérateur d'instanceof utilisé pour ?",
-              code: null,
-              options: [
-                "Créer une nouvelle instance",
-                "Vérifier le type d'un objet",
-                "Comparer deux instances",
-                "Convertir un type"
-              ],
-              correct: 1,
-              explanation: "instanceof vérifie si un objet est une instance d'une classe spécifique"
-            },
-            {
-              id: 14,
-              type: "mcq",
-              question: "Quelle méthode est appelée lors du garbage collection ?",
-              code: null,
-              options: ["destroy()", "finalize()", "delete()", "cleanup()"],
-              correct: 1,
-              explanation: "La méthode finalize() est appelée avant que l'objet ne soit récupéré"
-            },
-            {
-              id: 15,
-              type: "mcq",
-              question: "Que fait le mot-clé 'super' ?",
-              code: null,
-              options: [
-                "Appelle la classe mère",
-                "Crée une superclasse",
-                "Référence la classe courante",
-                "Augmente les performances"
-              ],
-              correct: 0,
-              explanation: "'super' fait référence à la classe parente"
+              explanation: "try-catch-finally est le mécanisme de gestion des exceptions. On peut aussi utiliser throws pour déclarer une exception."
             }
           ]
         },
@@ -429,7 +468,7 @@ export default {
 }`,
               correct: "i",
               alternatives: ["i", "I", "(i)"],
-              explanation: "La variable 'i' doit être affichée dans la boucle"
+              explanation: "La variable 'i' contient le numéro de l'itération et doit être affichée"
             },
             {
               id: 2,
@@ -440,12 +479,12 @@ export default {
 }`,
               correct: "int",
               alternatives: ["int", "Int"],
-              explanation: "Le type de retour doit être 'int' car la méthode retourne une somme d'entiers"
+              explanation: "Le type de retour doit être 'int' (primitif) car la méthode retourne la somme de deux entiers"
             },
             {
               id: 3,
               type: "completion",
-              question: "Complétez le constructeur de la classe :",
+              question: "Complétez le constructeur de la classe Personne :",
               code: `public class Personne {
     private String nom;
     
@@ -455,16 +494,16 @@ export default {
 }`,
               correct: "this",
               alternatives: ["this", "This"],
-              explanation: "'this' fait référence à l'instance courante de la classe"
+              explanation: "'this' fait référence à l'instance courante de la classe et permet de lever l'ambiguïté"
             },
             {
               id: 4,
               type: "completion",
               question: "Complétez le code pour créer une ArrayList de String :",
               code: `ArrayList<String> liste = new ___<>();`,
-              correct: "ArrayList<String>",
-              alternatives: ["ArrayList<String>", "ArrayList", "ArrayList<>"],
-              explanation: "Le constructeur doit spécifier le type ArrayList<String>"
+              correct: "ArrayList",
+              alternatives: ["ArrayList", "ArrayList<String>"],
+              explanation: "Avec l'opérateur diamant '<>', le type est inféré automatiquement"
             },
             {
               id: 5,
@@ -477,12 +516,12 @@ export default {
 }`,
               correct: "catch",
               alternatives: ["catch", "Catch"],
-              explanation: "Le mot-clé 'catch' est utilisé pour capturer une exception"
+              explanation: "Le mot-clé 'catch' est utilisé pour capturer et gérer une exception spécifique"
             },
             {
               id: 6,
               type: "completion",
-              question: "Complétez l'implémentation de l'interface :",
+              question: "Complétez l'implémentation de l'interface Animal :",
               code: `public interface Animal {
     void faireDuBruit();
 }
@@ -493,19 +532,19 @@ public class Chien ___ Animal {
     }
 }`,
               correct: "implements",
-              alternatives: ["implements", "extends", "Implements"],
-              explanation: "On utilise 'implements' pour implémenter une interface"
+              alternatives: ["implements", "extends"],
+              explanation: "On utilise 'implements' pour implémenter une interface. 'extends' est utilisé pour l'héritage de classe"
             },
             {
               id: 7,
               type: "completion",
-              question: "Complétez la classe abstraite :",
+              question: "Complétez la déclaration d'une classe abstraite Forme :",
               code: `public ___ class Forme {
     public abstract double calculerAire();
 }`,
               correct: "abstract",
-              alternatives: ["abstract", "Abstract", "interface"],
-              explanation: "Le mot-clé 'abstract' définit une classe abstraite"
+              alternatives: ["abstract", "Abstract"],
+              explanation: "Le mot-clé 'abstract' définit une classe abstraite qui ne peut pas être instanciée"
             },
             {
               id: 8,
@@ -521,26 +560,26 @@ public class Test {
     }
 }`,
               correct: "nextLine",
-              alternatives: ["nextLine", "readLine", "next", "NextLine"],
-              explanation: "La méthode nextLine() lit une ligne complète"
+              alternatives: ["nextLine", "readLine"],
+              explanation: "La méthode nextLine() de la classe Scanner lit une ligne complète jusqu'au retour chariot"
             },
             {
               id: 9,
               type: "completion",
-              question: "Complétez le code pour créer un thread :",
+              question: "Complétez le code pour créer un Thread par héritage :",
               code: `public class MonThread ___ Thread {
     public void run() {
         System.out.println("Thread en cours...");
     }
 }`,
               correct: "extends",
-              alternatives: ["extends", "implements", "inherits", "Extends"],
-              explanation: "On étend la classe Thread pour créer un nouveau thread"
+              alternatives: ["extends", "implements"],
+              explanation: "On étend (extends) la classe Thread pour créer un nouveau thread"
             },
             {
               id: 10,
               type: "completion",
-              question: "Complétez le code pour utiliser un HashMap :",
+              question: "Complétez le code pour instancier un HashMap :",
               code: `import java.util.HashMap;
 
 public class Test {
@@ -550,60 +589,8 @@ public class Test {
     }
 }`,
               correct: "new",
-              alternatives: ["new", "New", "create", "Create"],
-              explanation: "Le mot-clé 'new' est utilisé pour instancier un objet"
-            },
-            {
-              id: 11,
-              type: "completion",
-              question: "Complétez le code pour convertir une String en int :",
-              code: `String nombreTexte = "42";
-int nombre = Integer.___(nombreTexte);`,
-              correct: "parseInt",
-              alternatives: ["parseInt", "ParseInt", "valueOf", "toInt"],
-              explanation: "Integer.parseInt() convertit une String en int"
-            },
-            {
-              id: 12,
-              type: "completion",
-              question: "Complétez le code pour définir une constante :",
-              code: `public class Constantes {
-    public static ___ int MAX_VALUE = 100;
-}`,
-              correct: "final",
-              alternatives: ["final", "Final", "constant", "static"],
-              explanation: "'final' rend une variable constante (non modifiable)"
-            },
-            {
-              id: 13,
-              type: "completion",
-              question: "Complétez le code pour utiliser une énumération :",
-              code: `public ___ Jour {
-    LUNDI, MARDI, MERCREDI
-}`,
-              correct: "enum",
-              alternatives: ["enum", "Enum", "class", "interface"],
-              explanation: "Le mot-clé 'enum' définit un type d'énumération"
-            },
-            {
-              id: 14,
-              type: "completion",
-              question: "Complétez le code pour fermer une ressource avec try-with-resources :",
-              code: `___ (BufferedReader br = new BufferedReader(new FileReader("fichier.txt"))) {
-    String ligne = br.readLine();
-}`,
-              correct: "try",
-              alternatives: ["try", "Try", "with", "using"],
-              explanation: "try-with-resources garantit la fermeture des ressources"
-            },
-            {
-              id: 15,
-              type: "completion",
-              question: "Complétez le code pour créer un tableau :",
-              code: `int[] tableau = ___ int[10];`,
-              correct: "new",
-              alternatives: ["new", "New", "create", "make"],
-              explanation: "On utilise 'new' pour créer un tableau avec une taille spécifiée"
+              alternatives: ["new", "New"],
+              explanation: "Le mot-clé 'new' est utilisé pour créer une nouvelle instance d'objet en Java"
             }
           ]
         },
@@ -624,12 +611,12 @@ int nombre = Integer.___(nombreTexte);`,
 7:     }
 8: }`,
               correct: 5,
-              explanation: "Ligne 5 : Division par zéro qui causera une ArithmeticException"
+              explanation: "Ligne 5 : Division par zéro qui causera une ArithmeticException à l'exécution"
             },
             {
               id: 2,
               type: "error",
-              question: "Quelle ligne contient une erreur ?",
+              question: "Quelle ligne contient une erreur de syntaxe ?",
               code: `1: public class Animal {
 2:     private String nom;
 3:     
@@ -638,12 +625,12 @@ int nombre = Integer.___(nombreTexte);`,
 6:     }
 7: }`,
               correct: 5,
-              explanation: "Ligne 5 : Il manque un point-virgule à la fin de l'instruction"
+              explanation: "Ligne 5 : Il manque un point-virgule (;) à la fin de l'instruction d'assignation"
             },
             {
               id: 3,
               type: "error",
-              question: "Quelle ligne contient une erreur ?",
+              question: "Quelle ligne contient une erreur de compilation ?",
               code: `1: public class Calcul {
 2:     public static void main(String[] args) {
 3:         String texte = "123";
@@ -653,7 +640,7 @@ int nombre = Integer.___(nombreTexte);`,
 7:     }
 8: }`,
               correct: 5,
-              explanation: "Ligne 5 : Incompatibilité de types - on ne peut pas assigner un int à une String sans conversion"
+              explanation: "Ligne 5 : Incompatibilité de types - on ne peut pas assigner un int à une String sans conversion."
             },
             {
               id: 4,
@@ -669,12 +656,12 @@ int nombre = Integer.___(nombreTexte);`,
 8:     }
 9: }`,
               correct: 7,
-              explanation: "Ligne 7 : Impossible d'appeler une méthode d'instance depuis une méthode static sans créer d'objet"
+              explanation: "Ligne 7 : Impossible d'appeler une méthode d'instance (non-static) depuis une méthode static sans créer d'instance"
             },
             {
               id: 5,
               type: "error",
-              question: "Quelle ligne contient une erreur ?",
+              question: "Quelle ligne contient une erreur d'exécution ?",
               code: `1: public class Tableau {
 2:     public static void main(String[] args) {
 3:         int[] nombres = {1, 2, 3, 4, 5};
@@ -684,26 +671,12 @@ int nombre = Integer.___(nombreTexte);`,
 7:     }
 8: }`,
               correct: 4,
-              explanation: "Ligne 4 : i <= nombres.length causera un ArrayIndexOutOfBoundsException. Doit être i < nombres.length"
+              explanation: "Ligne 4 : La condition i <= nombres.length causera un ArrayIndexOutOfBoundsException."
             },
             {
               id: 6,
               type: "error",
-              question: "Quelle ligne contient une erreur ?",
-              code: `1: public class Boucle {
-2:     public static void main(String[] args) {
-3:         while (true)
-4:             System.out.println("Boucle infinie");
-5:             System.out.println("Cette ligne ne s'exécutera jamais");
-6:     }
-7: }`,
-              correct: 5,
-              explanation: "Ligne 5 : Sans accolades, seule la première instruction appartient à la boucle while"
-            },
-            {
-              id: 7,
-              type: "error",
-              question: "Quelle ligne contient une erreur ?",
+              question: "Quelle ligne causera une NullPointerException ?",
               code: `1: public class NullTest {
 2:     public static void main(String[] args) {
 3:         String str = null;
@@ -711,12 +684,12 @@ int nombre = Integer.___(nombreTexte);`,
 5:     }
 6: }`,
               correct: 4,
-              explanation: "Ligne 4 : NullPointerException car on essaie d'appeler .length() sur null"
+              explanation: "Ligne 4 : NullPointerException car on essaie d'appeler .length() sur une référence null"
             },
             {
-              id: 8,
+              id: 7,
               type: "error",
-              question: "Quelle ligne contient une erreur ?",
+              question: "Quelle ligne contient une erreur de compilation ?",
               code: `1: public class Heritage {
 2:     class Parent {
 3:         private void method() {}
@@ -727,12 +700,12 @@ int nombre = Integer.___(nombreTexte);`,
 8:     }
 9: }`,
               correct: 7,
-              explanation: "Ligne 7 : Impossible de redéfinir une méthode privée du parent"
+              explanation: "Ligne 7 : Impossible de redéfinir (@Override) une méthode privée du parent."
             },
             {
-              id: 9,
+              id: 8,
               type: "error",
-              question: "Quelle ligne contient une erreur ?",
+              question: "Quelle ligne causera une ClassCastException ?",
               code: `1: public class Cast {
 2:     public static void main(String[] args) {
 3:         Object obj = "Hello";
@@ -741,91 +714,29 @@ int nombre = Integer.___(nombreTexte);`,
 6:     }
 7: }`,
               correct: 4,
-              explanation: "Ligne 4 : ClassCastException - on ne peut pas caster une String en Integer"
+              explanation: "Ligne 4 : ClassCastException - on ne peut pas caster une String en Integer."
+            },
+            {
+              id: 9,
+              type: "error",
+              question: "Quelle ligne contient une erreur de compilation ?",
+              code: `1: import java.util.ArrayList;
+2: import java.util.List;
+3: 
+4: public class Generics {
+5:     public static void main(String[] args) {
+6:         List<String> list = new ArrayList<String>();
+7:         list.add("Hello");
+8:         list.add(123);
+9:     }
+10: }`,
+              correct: 8,
+              explanation: "Ligne 8 : Type mismatch - on ne peut pas ajouter un Integer à une List<String>."
             },
             {
               id: 10,
               type: "error",
-              question: "Quelle ligne contient une erreur ?",
-              code: `1: public class Switch {
-2:     public static void main(String[] args) {
-3:         int x = 2;
-4:         switch (x) {
-5:             case 1:
-6:                 System.out.println("Un");
-7:             break;
-8:             case 2:
-9:                 System.out.println("Deux");
-10:                 break;
-11:             default:
-12:                 System.out.println("Autre");
-13:         }
-14:     }
-15: }`,
-              correct: 13,
-              explanation: "Ligne 13 : Il manque 'break' dans le default, sinon il y aura fall-through"
-            },
-            {
-              id: 11,
-              type: "error",
-              question: "Quelle ligne contient une erreur ?",
-              code: `1: public class InterfaceTest {
-2:     interface MonInterface {
-3:         void method();
-4:     }
-5:     
-6:     class MaClasse implements MonInterface {
-7:         // Pas d'implémentation
-8:     }
-9: }`,
-              correct: 6,
-              explanation: "Ligne 6 : MaClasse doit implémenter method() car elle implémente MonInterface"
-            },
-            {
-              id: 12,
-              type: "error",
-              question: "Quelle ligne contient une erreur ?",
-              code: `1: public class Generics {
-2:     public static void main(String[] args) {
-3:         List<String> list = new ArrayList<String>();
-4:         list.add("Hello");
-5:         list.add(123);
-6:     }
-7: }`,
-              correct: 5,
-              explanation: "Ligne 5 : Type mismatch - on ne peut pas ajouter un Integer à une List<String>"
-            },
-            {
-              id: 13,
-              type: "error",
-              question: "Quelle ligne contient une erreur ?",
-              code: `1: public class StaticTest {
-2:     int instanceVar = 10;
-3:     
-4:     static void staticMethod() {
-5:         System.out.println(instanceVar);
-6:     }
-7: }`,
-              correct: 5,
-              explanation: "Ligne 5 : Une méthode static ne peut pas accéder à une variable d'instance"
-            },
-            {
-              id: 14,
-              type: "error",
-              question: "Quelle ligne contient une erreur ?",
-              code: `1: public class FinalTest {
-2:     public static void main(String[] args) {
-3:         final int x = 10;
-4:         x = 20;
-5:     }
-6: }`,
-              correct: 4,
-              explanation: "Ligne 4 : On ne peut pas modifier une variable final"
-            },
-            {
-              id: 15,
-              type: "error",
-              question: "Quelle ligne contient une erreur ?",
+              question: "Quelle ligne causera une ArrayIndexOutOfBoundsException ?",
               code: `1: public class ArrayInit {
 2:     public static void main(String[] args) {
 3:         int[] arr = new int[5];
@@ -833,12 +744,11 @@ int nombre = Integer.___(nombreTexte);`,
 5:     }
 6: }`,
               correct: 4,
-              explanation: "Ligne 4 : ArrayIndexOutOfBoundsException - les indices vont de 0 à 4"
+              explanation: "Ligne 4 : ArrayIndexOutOfBoundsException - pour un tableau de taille 5, les indices valides sont 0 à 4."
             }
           ]
         }
       },
-      // Configuration du nombre de questions par niveau
       questionsPerLevel: {
         level1: 5,
         level2: 5,
@@ -847,64 +757,34 @@ int nombre = Integer.___(nombreTexte);`,
     }
   },
   computed: {
-     shareEmailUrl() {
-      const subject = `Résultat Test Java - ${this.finalPercentage}%`;
-      
-      // Construire le corps du message avec les détails par niveau
-      let body = `Bonjour,\n\n`;
-      body += `Je viens de terminer le test Java et j'ai obtenu un score de ${this.finalPercentage}%.\n\n`;
-      body += `Détails par niveau :\n\n`;
-      
-      for (let level of [1, 2, 3]) {
-        const levelData = this.getLevelData(level);
-        const score = this.getLevelScore(level);
-        const total = this.getLevelTotal(level);
-        const percentage = this.getLevelPercentage(level);
-        
-        body += `${levelData.title} : ${score}/${total} - ${percentage}%\n`;
-      }
-      
-      body += `\nScore global : ${this.score}/${this.totalQuestions} - ${this.finalPercentage}%\n`;
-      body += `Appréciation : ${this.grade}\n\n`;
-      body += `---\n`;
-      body += `Envoyé depuis l'application de test Java`;
-      
-      // Encoder les paramètres pour l'URL
-      const encodedSubject = encodeURIComponent(subject);
-      const encodedBody = encodeURIComponent(body);
-      
-      return `mailto:7bhilal.chitou7@gmail.com?subject=${encodedSubject}&body=${encodedBody}`;
-    },
     currentLevelData() {
-      const selected = this.selectedQuestions[`level${this.currentLevel}`];
-      if (!selected || selected.questions.length === 0) {
-        return {
+      const levelKey = `level${this.currentLevel}`;
+      if (!this.selectedQuestions[levelKey]) {
+        return this.questionPool[levelKey] || {
           title: "Niveau en cours",
           description: "Chargement...",
           questions: []
         };
       }
-      return {
-        title: selected.title,
-        description: selected.description,
-        questions: selected.questions
-      };
+      return this.selectedQuestions[levelKey];
     },
     question() {
-      if (!this.currentLevelData.questions || this.currentLevelData.questions.length === 0) {
+      const questions = this.currentLevelData.questions || [];
+      if (this.currentQuestion >= questions.length) {
         return {};
       }
-      return this.currentLevelData.questions[this.currentQuestion];
+      return questions[this.currentQuestion];
     },
     totalQuestions() {
       return Object.values(this.questionsPerLevel).reduce((sum, count) => sum + count, 0);
     },
-    // Les autres computed properties restent identiques...
     progressPercentage() {
-      return ((this.answers.length / this.totalQuestions) * 100).toFixed(0);
+      const total = this.totalQuestions || 1;
+      return Math.min(100, Math.max(0, ((this.answers.length / total) * 100).toFixed(0)));
     },
     finalPercentage() {
-      return ((this.score / this.totalQuestions) * 100).toFixed(1);
+      const total = this.totalQuestions || 1;
+      return ((this.score / total) * 100).toFixed(1);
     },
     grade() {
       const percentage = parseFloat(this.finalPercentage);
@@ -963,16 +843,88 @@ int nombre = Integer.___(nombreTexte);`,
         return this.selectedAnswer !== null;
       }
       if (this.question.type === 'error') {
-        return this.userInput !== '' && this.userInput !== null;
+        const input = parseInt(this.userInput);
+        return !isNaN(input) && input > 0;
       }
       return this.userInput.trim() !== '';
     },
     lastAnswerCorrect() {
       return this.answers.length > 0 && this.answers[this.answers.length - 1].correct;
+    },
+    shareMessage() {
+      return `J'ai obtenu ${this.finalPercentage}% au test Java ! 🎯\n` +
+             `Score: ${this.score}/${this.totalQuestions}\n` +
+             `Niveau 1: ${this.getLevelPercentage(1)}%\n` +
+             `Niveau 2: ${this.getLevelPercentage(2)}%\n` +
+             `Niveau 3: ${this.getLevelPercentage(3)}%\n` +
+             `#JavaQuiz #Programmation`;
+    },
+    shareableLink() {
+      // Générer un lien unique basé sur le résultat
+      const resultData = {
+        score: this.score,
+        total: this.totalQuestions,
+        percentage: this.finalPercentage,
+        date: new Date().toISOString(),
+        levels: {
+          1: this.getLevelPercentage(1),
+          2: this.getLevelPercentage(2),
+          3: this.getLevelPercentage(3)
+        }
+      };
+      const encodedData = btoa(JSON.stringify(resultData));
+      return `${window.location.origin}${window.location.pathname}?result=${encodedData}`;
+    },
+    emailBody() {
+      let body = `RÉSULTAT DU TEST JAVA\n`;
+      body += `====================\n\n`;
+      body += `Score global : ${this.finalPercentage}%\n`;
+      body += `Note : ${this.score}/${this.totalQuestions}\n\n`;
+      
+      body += `DÉTAILS PAR NIVEAU\n`;
+      body += `=================\n`;
+      
+      for (let level of [1, 2, 3]) {
+        const levelData = this.getLevelData(level);
+        const score = this.getLevelScore(level);
+        const total = this.getLevelTotal(level);
+        const percentage = this.getLevelPercentage(level);
+        
+        body += `${levelData.title} : ${score}/${total} - ${percentage}%\n`;
+      }
+      
+      body += `\nAPPRÉCIATION : ${this.grade}\n\n`;
+      
+      body += `RECOMMANDATIONS\n`;
+      body += `===============\n`;
+      this.recommendations.forEach(rec => {
+        body += `${rec}\n`;
+      });
+      
+      body += `\nDate : ${new Date().toLocaleDateString('fr-FR', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      })}\n`;
+      
+      return body;
+    }
+  },
+  watch: {
+    testCompleted(newVal) {
+      if (newVal) {
+        // Envoyer automatiquement par email quand le test est terminé
+        this.sendAutoEmail();
+        
+        // Sauvegarder le résultat
+        this.saveResult();
+      }
     }
   },
   methods: {
-    // Méthode pour sélectionner aléatoirement les questions
     selectRandomQuestions() {
       const selected = {};
       
@@ -980,17 +932,12 @@ int nombre = Integer.___(nombreTexte);`,
         const pool = this.questionPool[level];
         const questionsNeeded = this.questionsPerLevel[level];
         
-        // Créer une copie du pool de questions
         let availableQuestions = [...pool.questions];
-        
-        // Sélectionner aléatoirement
         const selectedQuestions = [];
         
-        for (let i = 0; i < questionsNeeded && availableQuestions.length > 0; i++) {
+        for (let i = 0; i < Math.min(questionsNeeded, availableQuestions.length); i++) {
           const randomIndex = Math.floor(Math.random() * availableQuestions.length);
           selectedQuestions.push(availableQuestions[randomIndex]);
-          
-          // Retirer la question sélectionnée pour éviter les doublons
           availableQuestions.splice(randomIndex, 1);
         }
         
@@ -1004,18 +951,21 @@ int nombre = Integer.___(nombreTexte);`,
       this.selectedQuestions = selected;
     },
     
-    handleAnswer(answer) {
-      this.selectedAnswer = answer;
+    handleAnswer(index) {
+      this.selectedAnswer = index;
     },
     
     checkAnswer() {
+      if (!this.canSubmit) return;
+      
       let isCorrect = false;
 
       if (this.question.type === "mcq") {
         isCorrect = this.selectedAnswer === this.question.correct;
       } else if (this.question.type === "completion") {
+        const userAnswer = this.userInput.trim().toLowerCase();
         isCorrect = this.question.alternatives.some(alt => 
-          this.userInput.trim().toLowerCase() === alt.toLowerCase()
+          userAnswer === alt.toLowerCase()
         );
       } else if (this.question.type === "error") {
         isCorrect = parseInt(this.userInput) === this.question.correct;
@@ -1035,24 +985,23 @@ int nombre = Integer.___(nombreTexte);`,
     },
     
     nextQuestion() {
-      if (this.currentQuestion < this.currentLevelData.questions.length - 1) {
+      const questions = this.currentLevelData.questions || [];
+      
+      if (this.currentQuestion < questions.length - 1) {
         this.currentQuestion++;
-        this.selectedAnswer = null;
-        this.userInput = '';
-        this.showResult = false;
       } else if (this.currentLevel < 3) {
         this.currentLevel++;
         this.currentQuestion = 0;
-        this.selectedAnswer = null;
-        this.userInput = '';
-        this.showResult = false;
       } else {
         this.testCompleted = true;
       }
+      
+      this.selectedAnswer = null;
+      this.userInput = '';
+      this.showResult = false;
     },
     
     resetTest() {
-      // Réinitialiser toutes les données
       this.currentLevel = 1;
       this.currentQuestion = 0;
       this.selectedAnswer = null;
@@ -1061,15 +1010,17 @@ int nombre = Integer.___(nombreTexte);`,
       this.answers = [];
       this.testCompleted = false;
       this.userInput = '';
+      this.emailSent = false;
+      this.showShareOptions = false;
+      this.copiedToClipboard = false;
       
-      // Sélectionner de nouvelles questions aléatoires
       this.selectRandomQuestions();
     },
     
     getOptionClass(index) {
       if (!this.showResult) {
         if (this.selectedAnswer === index) {
-          return 'border-red-500 bg-red-50';
+          return 'border-red-500 bg-red-50 hover:bg-red-100';
         }
         return 'border-gray-200 hover:border-red-300 hover:bg-gray-50';
       }
@@ -1077,7 +1028,7 @@ int nombre = Integer.___(nombreTexte);`,
       if (index === this.question.correct) {
         return 'border-green-500 bg-green-50';
       }
-      if (index === this.selectedAnswer) {
+      if (index === this.selectedAnswer && index !== this.question.correct) {
         return 'border-red-500 bg-red-50';
       }
       return 'border-gray-200 bg-gray-50';
@@ -1106,7 +1057,8 @@ int nombre = Integer.___(nombreTexte);`,
     },
     
     getLevelData(level) {
-      return this.selectedQuestions[`level${level}`] || this.questionPool[`level${level}`];
+      const levelKey = `level${level}`;
+      return this.selectedQuestions[levelKey] || this.questionPool[levelKey] || { title: `Niveau ${level}`, questions: [] };
     },
     
     getLevelScore(level) {
@@ -1115,35 +1067,155 @@ int nombre = Integer.___(nombreTexte);`,
     },
     
     getLevelTotal(level) {
-      return this.questionsPerLevel[`level${level}`];
+      return this.questionsPerLevel[`level${level}`] || 0;
     },
     
     getLevelPercentage(level) {
       const score = this.getLevelScore(level);
       const total = this.getLevelTotal(level);
-      return total > 0 ? ((score / total) * 100).toFixed(0) : 0;
+      return total > 0 ? Math.round((score / total) * 100) : 0;
+    },
+    
+    // Méthodes de partage
+    sendAutoEmail() {
+      const subject = `Mon résultat Test Java : ${this.finalPercentage}%`;
+      const encodedSubject = encodeURIComponent(subject);
+      const encodedBody = encodeURIComponent(this.emailBody);
+      
+      const mailtoLink = `mailto:?subject=${encodedSubject}&body=${encodedBody}`;
+      
+      // Ouvrir dans un nouvel onglet
+      setTimeout(() => {
+        window.open(mailtoLink, '_blank');
+        this.emailSent = true;
+      }, 1000);
+    },
+    
+    toggleShareOptions() {
+      this.showShareOptions = !this.showShareOptions;
+    },
+    
+    shareViaEmail() {
+      const subject = `Regarde mon résultat Test Java : ${this.finalPercentage}%`;
+      const encodedSubject = encodeURIComponent(subject);
+      const encodedBody = encodeURIComponent(this.emailBody);
+      
+      window.open(`mailto:?subject=${encodedSubject}&body=${encodedBody}`, '_blank');
+    },
+    
+    shareViaWhatsApp() {
+      const text = encodeURIComponent(this.shareMessage + '\n\n' + this.shareableLink);
+      window.open(`https://wa.me/?text=${text}`, '_blank');
+    },
+    
+    shareViaFacebook() {
+      const url = encodeURIComponent(this.shareableLink);
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+    },
+    
+    shareViaTwitter() {
+      const text = encodeURIComponent(this.shareMessage);
+      const url = encodeURIComponent(this.shareableLink);
+      window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=600,height=400');
+    },
+    
+    copyToClipboard() {
+      navigator.clipboard.writeText(this.shareableLink)
+        .then(() => {
+          this.copiedToClipboard = true;
+          setTimeout(() => {
+            this.copiedToClipboard = false;
+          }, 3000);
+        })
+        .catch(() => {
+          // Fallback pour anciens navigateurs
+          const textArea = document.createElement('textarea');
+          textArea.value = this.shareableLink;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          this.copiedToClipboard = true;
+          setTimeout(() => {
+            this.copiedToClipboard = false;
+          }, 3000);
+        });
+    },
+    
+    saveResult() {
+      const result = {
+        score: this.score,
+        total: this.totalQuestions,
+        percentage: this.finalPercentage,
+        grade: this.grade,
+        date: new Date().toISOString(),
+        levels: {
+          1: this.getLevelPercentage(1),
+          2: this.getLevelPercentage(2),
+          3: this.getLevelPercentage(3)
+        }
+      };
+      
+      localStorage.setItem('javaTestResult', JSON.stringify(result));
     }
   },
   created() {
-    // Sélectionner aléatoirement les questions au chargement
     this.selectRandomQuestions();
+    
+    // Essayer de récupérer un résultat précédent
+    const savedResult = localStorage.getItem('javaTestResult');
+    if (savedResult) {
+      try {
+        const result = JSON.parse(savedResult);
+        console.log('Résultat précédent:', result);
+      } catch (e) {
+        console.error('Erreur lors du chargement du résultat:', e);
+      }
+    }
   }
 }
-
 </script>
 
 <style scoped>
-/* Les styles restent identiques */
 pre {
   white-space: pre-wrap;
   word-wrap: break-word;
+  font-family: 'Courier New', monospace;
+  line-height: 1.4;
+  tab-size: 2;
 }
 
 button:disabled {
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
 input:focus {
   outline: none;
+}
+
+/* Animation pour le bouton copié */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.text-green-600 {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Amélioration de la lisibilité */
+.bg-gradient-to-r {
+  background-size: 200% auto;
+  transition: background-position 0.5s ease;
+}
+
+.bg-gradient-to-r:hover {
+  background-position: right center;
+}
+
+/* Amélioration du focus */
+.focus\:ring-2:focus {
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
 }
 </style>

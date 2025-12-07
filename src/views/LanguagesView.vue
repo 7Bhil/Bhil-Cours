@@ -134,51 +134,101 @@
           </div>
 
           <!-- C++ -->
-          <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                <svg class="w-7 h-7 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M22.394 6c-.167-.29-.398-.543-.652-.69L12.926.22c-.509-.294-1.34-.294-1.848 0L2.26 5.31c-.508.293-.923 1.013-.923 1.6v10.18c0 .294.104.62.271.91.167.29.398.543.652.69l8.816 5.09c.508.293 1.34.293 1.848 0l8.816-5.09c.254-.147.485-.4.652-.69.167-.29.27-.616.27-.91V6.91c.003-.294-.1-.62-.268-.91zM12 19.11c-3.92 0-7.11-3.19-7.11-7.11 0-3.92 3.19-7.11 7.11-7.11 3.92 0 7.11 3.19 7.11 7.11 0 3.92-3.19 7.11-7.11 7.11zm5.392-7.11l-1.103 1.103c-.36.36-.36.942 0 1.301l1.103 1.103c.36.36.942.36 1.301 0l1.103-1.103c.36-.36.36-.942 0-1.301l-1.103-1.103c-.36-.36-.942-.36-1.301 0zm-2.598 0l-1.103 1.103c-.36.36-.36.942 0 1.301l1.103 1.103c.36.36.942.36 1.301 0l1.103-1.103c.36-.36.36-.942 0-1.301l-1.103-1.103c-.36-.36-.942-.36-1.301 0z"/>
-                </svg>
-              </div>
-              <h3 class="text-xl font-bold text-gray-900">C++</h3>
-            </div>
-            
-            <p class="text-gray-600 mb-4 text-sm leading-relaxed">
-              Langage système haute performance pour les jeux, systèmes embarqués et applications critiques.
-            </p>
-            
-            <div class="flex flex-wrap gap-2 mb-6">
-              <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Système</span>
-              <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Gaming</span>
-              <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Performance</span>
-            </div>
-            
-            <div class="space-y-2">
-              <router-link 
-                :to="{ name: 'technology', params: { tech: 'cpp' }}"
-                class="block w-full bg-blue-600 text-white py-2.5 px-4 rounded-lg text-center font-medium hover:bg-blue-700 transition-colors"
-              >
-                Voir les ressources
-              </router-link>
-              
-              <div class="grid grid-cols-2 gap-2">
-                <a 
-                  href="mailto:7bhilal.chitou7@gmail.com?subject=Question sur C++"
-                  class="bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-center text-sm hover:bg-gray-200 transition-colors"
-                >
-                  Email
-                </a>
-                <a 
-                  href="https://wa.me/22998874019?text=Question sur C++"
-                  target="_blank"
-                  class="bg-green-50 text-green-700 py-2 px-3 rounded-lg text-center text-sm hover:bg-green-100 transition-colors"
-                >
-                  WhatsApp
-                </a>
-              </div>
-            </div>
-          </div>
+<div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
+  <div class="flex items-center mb-4">
+    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+      <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m5 2v-1a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2h-6a2 2 0 01-2-2v-1"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2h-2"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h4m-4 4h4M8 17h2"/>
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold text-gray-900">C++</h3>
+  </div>
+  
+  <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+    Langage système haute performance pour les jeux, systèmes embarqués et applications critiques.
+  </p>
+  
+  <div class="flex flex-wrap gap-2 mb-6">
+    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Système</span>
+    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Gaming</span>
+    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Performance</span>
+  </div>
+  
+  <div class="space-y-2">
+    <router-link 
+      :to="{ name: 'technology', params: { tech: 'cpp' }}"
+      class="block w-full bg-blue-600 text-white py-2.5 px-4 rounded-lg text-center font-medium hover:bg-blue-700 transition-colors"
+    >
+      Voir les ressources
+    </router-link>
+    
+    <div class="grid grid-cols-2 gap-2">
+      <a 
+        href="mailto:7bhilal.chitou7@gmail.com?subject=Question sur C++"
+        class="bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-center text-sm hover:bg-gray-200 transition-colors"
+      >
+        Email
+      </a>
+      <a 
+        href="https://wa.me/22998874019?text=Question sur C++"
+        target="_blank"
+        class="bg-green-50 text-green-700 py-2 px-3 rounded-lg text-center text-sm hover:bg-green-100 transition-colors"
+      >
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- C -->
+<div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
+  <div class="flex items-center mb-4">
+    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+      <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        <circle cx="12" cy="12" r="2" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold text-gray-900">C</h3>
+  </div>
+  
+  <p class="text-gray-600 mb-4 text-sm leading-relaxed">
+    Langage de bas niveau pour la programmation système, noyaux d'OS et microcontrôleurs.
+  </p>
+  
+  <div class="flex flex-wrap gap-2 mb-6">
+    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Système</span>
+    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Embedded</span>
+    <span class="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">Performance</span>
+  </div>
+  
+  <div class="space-y-2">
+    <router-link 
+      :to="{ name: 'technology', params: { tech: 'c' }}"
+      class="block w-full bg-blue-600 text-white py-2.5 px-4 rounded-lg text-center font-medium hover:bg-blue-700 transition-colors"
+    >
+      Voir les ressources
+    </router-link>
+    
+    <div class="grid grid-cols-2 gap-2">
+      <a 
+        href="mailto:7bhilal.chitou7@gmail.com?subject=Question sur C"
+        class="bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-center text-sm hover:bg-gray-200 transition-colors"
+      >
+        Email
+      </a>
+      <a 
+        href="https://wa.me/22998874019?text=Question sur C"
+        target="_blank"
+        class="bg-green-50 text-green-700 py-2 px-3 rounded-lg text-center text-sm hover:bg-green-100 transition-colors"
+      >
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
 
           <!-- Python -->
           <div class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow duration-300">
@@ -249,12 +299,12 @@
             </div>
             
             <div class="space-y-2">
-              <router-link 
-                :to="{ name: 'technology', params: { tech: 'ruby' }}"
+              <RouterLink
+                to="/ruby"
                 class="block w-full bg-blue-600 text-white py-2.5 px-4 rounded-lg text-center font-medium hover:bg-blue-700 transition-colors"
               >
                 Voir les ressources
-              </router-link>
+              </RouterLink>
               
               <div class="grid grid-cols-2 gap-2">
                 <a 

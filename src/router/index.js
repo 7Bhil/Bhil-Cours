@@ -12,8 +12,8 @@ const Java = () => import('../views/Java.vue')
 const Javatest = () => import('../views/Javatest.vue')
 /*const Python = () => import('../views/Python.vue')
 const Cpp = () => import('../views/Cpp.vue')
-const Ruby = () => import('../views/Ruby.vue')
 const Php = () => import('../views/Php.vue')*/
+const Ruby = () => import('../views/Ruby.vue')
 const routes = [
   {
     path: '/',
@@ -49,12 +49,12 @@ const routes = [
     path: '/cpp',
     name: 'cpp',
     component: Cpp
-  },
+  },*/
   {
     path: '/ruby',
     name: 'ruby',
     component: Ruby
-  },
+  },/*
   {
     path: '/php',
     name: 'php',
