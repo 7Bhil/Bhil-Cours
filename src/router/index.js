@@ -9,6 +9,7 @@ const ContactView = () => import('../views/ContactView.vue')
 const TechnologyView = () => import('../views/TechnologyView.vue')
 const Js = () => import('../views/JavaScript.vue')
 const Java = () => import('../views/Java.vue')
+const Javatest = () => import('../views/Javatest.vue')
 /*const Python = () => import('../views/Python.vue')
 const Cpp = () => import('../views/Cpp.vue')
 const Ruby = () => import('../views/Ruby.vue')
@@ -33,6 +34,11 @@ const routes = [
     path: '/java',
     name: 'java',
     component: Java
+  },
+  {
+    path: '/javatest',
+    name: 'javatest',
+    component: Javatest
   },/*
   {
     path: '/python',

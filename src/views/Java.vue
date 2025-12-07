@@ -1,4 +1,7 @@
-<template>
+
+	components: {
+		Java,
+	},<template>
   <div class="java-page bg-white">
     <!-- Hero Section -->
     <section class="relative bg-gradient-to-b from-red-50 to-white py-16">
@@ -6,10 +9,12 @@
         <div class="flex flex-col md:flex-row items-center gap-8">
           <!-- Logo et titre -->
           <div class="flex-shrink-0">
-            <div class="w-24 h-24 bg-red-600 rounded-2xl flex items-center justify-center shadow-lg">
-              <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M8.851 18.56c-2.966 0-4.276-1.377-4.276-2.643 0-.36.298-.66.66-.66.796 0 .398 1.155 3.616 1.155 2.374 0 3.217-.557 3.217-1.408 0-.617-.398-1.008-1.847-1.287l-2.006-.438c-2.395-.518-3.497-1.408-3.497-3.058 0-2.155 1.987-3.317 4.873-3.317 2.926 0 4.356 1.302 4.356 2.762 0 .36-.298.66-.66.66-.676 0-.438-.956-3.536-.956-2.395 0-3.098.557-3.098 1.328 0 .617.438.956 1.867 1.235l1.787.398c2.595.557 3.776 1.447 3.776 3.217 0 2.354-2.125 3.536-5.162 3.536zm7.349 0c-2.126 0-3.856-.877-3.856-2.762 0-.36.298-.66.66-.66.677 0 .438 1.055 3.196 1.055 1.507 0 2.095-.24 2.095-.797 0-.28-.14-.518-.797-.618l-1.487-.28c-2.275-.438-3.377-1.188-3.377-2.923 0-2.155 1.986-3.217 4.593-3.217 2.286 0 3.736.877 3.736 2.643 0 .36-.299.66-.66.66-.676 0-.438-.996-3.076-.996-1.447 0-1.986.24-1.986.717 0 .32.2.518.877.618l1.427.28c2.355.438 3.437 1.208 3.437 3.018 0 2.235-1.986 3.336-4.613 3.336z"/>
-              </svg>
+            <div class="flex items-center mb-4">
+              <div class="w-24 h-22 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+                <svg class="w-17 h-71 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0-.001.07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0-.001.553.457 3.393.639"/>
+                </svg>
+              </div>
             </div>
           </div>
 
@@ -650,16 +655,17 @@ public class Rectangle extends FormeGeometrique implements Forme {
                   </div>
                   <div>
                     <h3 class="font-semibold text-gray-900 mb-1">Cheatsheets Java</h3>
-                    <p class="text-sm text-gray-600 mb-2">Résumés et références rapides</p>
-                    <span class="text-xs text-gray-500">PDF • 1.5 MB</span>
+                    <p class="text-sm text-gray-600 mb-2">Question rapides pour évaluer vos connaissances</p>
                   </div>
                 </div>
-                <button 
-                  @click="downloadPDF('04-java-cheatsheets.pdf')"
+                <Button
+                to="/javatest"
                   class="w-full bg-red-600 text-white py-2.5 rounded-lg font-medium hover:bg-red-700 transition-colors focus:outline-none"
                 >
-                  Télécharger les cheatsheets
-                </button>
+                  <RouterLink to="/javatest">
+                    Passer le teste de niveau
+                  </RouterLink>
+                </Button>
               </div>
             </div>
           </section>
@@ -828,6 +834,8 @@ public class Rectangle extends FormeGeometrique implements Forme {
 </template>
 
 <script>
+import Java from '@/views/Java.vue'
+
 export default {
   name: 'JavaPage',
   data() {

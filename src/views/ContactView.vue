@@ -56,7 +56,7 @@
           
           <div class="space-y-4">
             <a 
-              href="https://wa.me/22998874019?text=Bonjour%20EduCode,%20j'ai%20une%20question"
+              href="https://wa.me/22998874019?text=Bonjour%20Bhil$,%20j'ai%20une%20question"
               target="_blank"
               class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-lg text-center block transition"
             >
@@ -215,7 +215,7 @@
       <div class="space-y-4">
         <div class="bg-white p-4 rounded-lg">
           <h4 class="font-bold text-gray-900 mb-2">Les ressources sont-elles vraiment gratuites ?</h4>
-          <p class="text-gray-600">Oui, toutes les ressources sur EduCode sont 100% gratuites. C'est un projet éducatif bénévole.</p>
+          <p class="text-gray-600">Oui, toutes les ressources sur Bhil$ sont 100% gratuites. C'est un projet éducatif bénévole.</p>
         </div>
         
         <div class="bg-white p-4 rounded-lg">
@@ -249,7 +249,7 @@ export default {
   methods: {
     sendMessage() {
       // En front-end, on utilise mailto: pour ouvrir le client mail
-      const subject = `Contact EduCode: ${this.getSubjectText(this.form.subject)} - ${this.form.name}`;
+      const subject = `Contact Bhil$: ${this.getSubjectText(this.form.subject)} - ${this.form.name}`;
       const body = `Nom: ${this.form.name}
 Email: ${this.form.email}
 Sujet: ${this.getSubjectText(this.form.subject)}

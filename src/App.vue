@@ -12,7 +12,7 @@
               </svg>
             </div>
             <div class="flex flex-col">
-              <span class="text-xl font-bold text-gray-900">EduCode</span>
+              <span class="text-xl font-bold text-gray-900">Bhil$</span>
               <span class="text-xs text-gray-500">Formation Pro</span>
             </div>
           </router-link>
@@ -191,7 +191,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                 </svg>
               </div>
-              <span class="text-lg font-bold text-white">EduCode</span>
+              <span class="text-lg font-bold text-white">Bhil$</span>
             </div>
             <p class="text-sm text-gray-400 leading-relaxed">
               Plateforme de formation en ligne spécialisée dans l'enseignement de la programmation et des technologies numériques.
@@ -279,7 +279,7 @@
         <!-- Bas de page -->
         <div class="pt-8 flex flex-col md:flex-row justify-between items-center">
           <p class="text-sm text-gray-400">
-            © 2024 EduCode. Tous droits réservés.
+            © 2024 Bhil$. Tous droits réservés.
           </p>
           <div class="flex space-x-6 mt-4 md:mt-0">
             <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors">

@@ -251,7 +251,7 @@
               Prêt à développer vos compétences ?
             </h2>
             <p class="text-xl text-gray-300 mb-10">
-              Rejoignez des milliers d'apprenants qui utilisent déjà EduCode pour progresser en programmation.
+              Rejoignez des milliers d'apprenants qui utilisent déjà Bhil$ pour progresser en programmation.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
               <router-link to="/langages" class="btn-primary bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 inline-flex items-center justify-center">
