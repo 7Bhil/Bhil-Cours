@@ -753,15 +753,17 @@ int nombre = Integer.___(nombreTexte);`,
 4:         switch (x) {
 5:             case 1:
 6:                 System.out.println("Un");
-7:             case 2:
-8:                 System.out.println("Deux");
-9:             default:
-10:                System.out.println("Autre");
-11:        }
-12:    }
-13: }`,
-              correct: 11,
-              explanation: "Ligne 11 : Il manque 'break' dans les cas, sinon il y aura fall-through"
+7:             break;
+8:             case 2:
+9:                 System.out.println("Deux");
+10:                 break;
+11:             default:
+12:                 System.out.println("Autre");
+13:         }
+14:     }
+15: }`,
+              correct: 13,
+              explanation: "Ligne 13 : Il manque 'break' dans le default, sinon il y aura fall-through"
             },
             {
               id: 11,
